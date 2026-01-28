@@ -3,7 +3,7 @@ from pages.saby_page import SabyPage
 from pages.tensor_page import TensorPage
 
 
-def test_saby_navigation_to_contacts(driver):
+def test_saby_navigation_to_contacts(driver) -> None:
     """Сценарий: переход из Саби в Тензор и проверка контента.
         1. Открывает Саби, переходит в раздел контактов
         2. Проверяет переход и кликает по баннеру Тензор
@@ -12,8 +12,7 @@ def test_saby_navigation_to_contacts(driver):
         5. Сверяет размеры всех фотографий в блоке Работаем"""
 
     saby_page = SabyPage(driver)
-    saby_page.open_saby()
-    saby_page.hover_and_click_contacts()
+    saby_page.go_to_contact_page()
 
     assert "contacts" in driver.current_url, "Не перешли в раздел контакты"
 
@@ -29,6 +28,6 @@ def test_saby_navigation_to_contacts(driver):
 
     tensor_page.go_to_about_in_block_power_in_people()
 
-    assert "about" in driver.current_url, "Не перешли в раздел подробнее"
+    assert driver.current_url == "https://tensor.ru/about", "Не перешли в раздел подробнее"
 
     assert tensor_page.check_h_and_w_images_in_work(), "Фотографии имеют разные размеры"
