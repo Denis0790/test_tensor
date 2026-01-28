@@ -53,6 +53,11 @@ class SabyPage(BasePage):
         partners = self.find_elements(self.REGION_IN_PARTNERS)
         return len(partners) > 0
 
+    def get_partners_list_text(self) -> str:
+        """Собирает названия всех партнеров в одну строку для сравнения списков"""
+        partners = self.find_elements(self.REGION_IN_PARTNERS)
+        return "".join([partner.text for partner in partners])
+
     def change_region_kamchatka(self) -> None:
         """Нажимаем на свой регион и выбираем регион Камчатка"""
         self.click(self.REGION_IN_CONTACTS)

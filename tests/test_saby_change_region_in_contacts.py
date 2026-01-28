@@ -14,8 +14,11 @@ def test_region_in_contacts(driver) -> None:
                                                              f"но определился {saby_page.get_region_text()}")
 
     assert saby_page.is_partners_list_visible(), "Список партнеров пуст или не загрузился"
+    old_partners_list = saby_page.get_partners_list_text()
 
     saby_page.change_region_kamchatka()
+    new_partners_list = saby_page.get_partners_list_text()
+    assert old_partners_list != new_partners_list, "Список партнеров не изменился после смены региона!"
 
     assert "41-kamchatskij-kraj" in driver.current_url, "URL не обновился"
     assert "Камчатский край" in driver.title, "Title не обновился"
