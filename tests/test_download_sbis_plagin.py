@@ -2,9 +2,14 @@ import os
 from pages.saby_pages.download_page import DownloadPage
 from pages.saby_pages.main_page import MainPage
 from utils.file_utils import FileHelper
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def test_download_sbis_plagin(driver):
+    """Скачиваем ехе файл плагина для 1С"""
+    logger.info("Старт теста - Скачивание плагина 1С")
     main_page = MainPage(driver)
     download_page = DownloadPage(driver)
 
@@ -27,4 +32,4 @@ def test_download_sbis_plagin(driver):
     assert actual_size == expected_size, f"Размер не совпал! Сайт: {expected_size}, Диск: {actual_size}"
 
     FileHelper.delete_if_exists(file_path)
-
+    logger.info("Тест скачивания завершен успешно")

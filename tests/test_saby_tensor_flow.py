@@ -2,6 +2,9 @@ from conftest import driver
 from pages.saby_pages.contacts_page import ContactsPage
 from pages.saby_pages.main_page import MainPage
 from pages.tensor_page import TensorPage
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def test_saby_navigation_to_contacts(driver) -> None:
@@ -13,7 +16,7 @@ def test_saby_navigation_to_contacts(driver) -> None:
     4. Проверяет блок Сила в людях и переходит в Подробнее
     5. Сверяет размеры всех фотографий в блоке Работаем
     """
-
+    logger.info("Старт теста - Навигация Саби -> Тензор")
     main_page = MainPage(driver)
     contacts_page = ContactsPage(driver)
 
@@ -39,3 +42,4 @@ def test_saby_navigation_to_contacts(driver) -> None:
 
     assert tensor_page.check_h_and_w_images_in_work(), \
         "Фотографии в блоке 'Работаем' имеют разные размеры"
+    logger.info("Тест навигации и проверки картинок завершен успешно")

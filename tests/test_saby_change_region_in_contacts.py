@@ -1,11 +1,14 @@
 from conftest import driver
 from pages.saby_pages.contacts_page import ContactsPage
 from pages.saby_pages.main_page import MainPage
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def test_region_in_contacts(driver) -> None:
     """Проверяем, что регион соответствует региону в Партнерах на странице Контакты"""
-
+    logger.info("Старт теста - Смена региона и проверка партнеров")
     main_page = MainPage(driver)
     contacts_page = ContactsPage(driver)
 
@@ -35,5 +38,4 @@ def test_region_in_contacts(driver) -> None:
 
     assert contacts_page.check_region_and_partners_region(), \
         "Партнеры не соответствуют Камчатке"
-
-
+    logger.info("Тест смены региона завершен успешно")
